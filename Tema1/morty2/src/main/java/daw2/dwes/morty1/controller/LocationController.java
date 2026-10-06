@@ -27,4 +27,15 @@ public class LocationController {
         model.addAttribute("location", service.findById(id));
         return "locations/detail";
     }
+    @GetMapping("/update/{id}")
+    public String actualizarUbicacion(@PathVariable Long id) {
+        service.actualizarNombreUbicacion(id, "Ubicación actualizada");
+        return "redirect:/locations/detail/" + id;
+    }
+
+    @GetMapping("/list")
+    public String listarUbicaciones(Model modelo) {
+        modelo.addAttribute("locations", service.obtenerUbicacionesConHumanos());
+        return "locations/list";
+    }
 }

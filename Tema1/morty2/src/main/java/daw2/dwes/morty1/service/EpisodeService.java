@@ -21,5 +21,17 @@ public class EpisodeService {
     public Episode findById(Long id) {
         return repository.findById(id).orElse(null);
     }
+
+    public void crearEpisodio(Episode episodio) {
+        repository.save(episodio);
+    }
+
+    public List<Episode> obtenerEpisodiosPosterioresAFecha(String fecha) {
+        return repository.encontrarPorFechaEmisionPosteriorA(fecha);
+    }
+
+    public long obtenerTotalEpisodios() {
+        return repository.count();
+    }
 }
 
