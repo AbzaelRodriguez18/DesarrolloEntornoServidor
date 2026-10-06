@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Héroes</title>
+</head>
+
+<body>
+
+<h1>Lista de héroes</h1>
+
+<p>
+    <a href="/heroes/initialize">Inicializar héroes</a>
+</p>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Clase</th>
+        <th>Nivel</th>
+        <th>Experiencia</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="hero : ${heroes}">
+        <td>
+            <a th:href="@{/heroes/{name}(name=${hero.name})}"
+               th:text="${hero.name}">
+                Nombre
+            </a>
+        </td>
+
+        <td th:text="${hero.heroClass}">
+            Clase
+        </td>
+
+        <td th:text="${hero.nivel}">
+            Nivel
+        </td>
+
+        <td th:text="${hero.experience}">
+            Experiencia
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<p>
+    <a href="/quests">Ver misiones</a>
+</p>
+
+</body>
+</html>

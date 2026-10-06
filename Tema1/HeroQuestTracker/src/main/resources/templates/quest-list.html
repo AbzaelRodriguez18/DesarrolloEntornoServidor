@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Misiones</title>
+</head>
+
+<body>
+
+<h1>Lista de misiones</h1>
+
+<p>
+    <a href="/quests/new">Crear nueva misión</a>
+</p>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Héroe</th>
+        <th>Experiencia</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="quest : ${quests}">
+
+        <td th:text="${quest.id}">
+            1
+        </td>
+
+        <td th:text="${quest.title}">
+            Título
+        </td>
+
+        <td>
+            <a th:if="${quest.hero != null}"
+               th:href="@{/heroes/{name}(name=${quest.hero.name})}"
+               th:text="${quest.hero.name}">
+                Héroe
+            </a>
+
+            <span th:unless="${quest.hero != null}">
+                Sin héroe
+            </span>
+        </td>
+
+        <td th:text="${quest.experience}">
+            0
+        </td>
+
+        <td>
+            <span th:if="${quest.solved}">
+                Resuelta
+            </span>
+
+            <span th:unless="${quest.solved}">
+                Pendiente
+            </span>
+        </td>
+
+        <td>
+            <a th:if="${!quest.solved}"
+               th:href="@{/quests/solve/{id}(id=${quest.id})}">
+                Resolver
+            </a>
+
+            <a th:href="@{/quests/fail/{id}(id=${quest.id})}">
+                Borrar
+            </a>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+
+<p>
+    <a href="/heroes">Ver héroes</a>
+</p>
+
+</body>
+</html>
